@@ -63,6 +63,14 @@ export function Dashboard({
     [currentSession],
   )
 
+  const handleCycleStatsView = useCallback(() => {
+    if (sessionStore) sessionStore.cycleStatsView(1)
+  }, [sessionStore])
+
+  const handleCycleStatsViewBack = useCallback(() => {
+    if (sessionStore) sessionStore.cycleStatsView(-1)
+  }, [sessionStore])
+
   useKeyboard({
     onSwitchAccount: showSettings ? undefined : (index) => accountStore.switchTo(index),
     onTabNext: showSettings
@@ -96,14 +104,6 @@ export function Dashboard({
       </Box>
     )
   }
-
-  const handleCycleStatsView = useCallback(() => {
-    if (sessionStore) sessionStore.cycleStatsView(1)
-  }, [sessionStore])
-
-  const handleCycleStatsViewBack = useCallback(() => {
-    if (sessionStore) sessionStore.cycleStatsView(-1)
-  }, [sessionStore])
 
   const friendPanel = (
     <FriendPanel
