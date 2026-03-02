@@ -4,6 +4,7 @@ export interface UserState {
   level: number
   gold: number
   exp: number
+  openId: string
 }
 
 export interface OperationLimit {

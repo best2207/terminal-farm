@@ -25,7 +25,7 @@ export class Connection extends EventEmitter {
   private rttSamples: number[] = []
   private static readonly MAX_RTT_SAMPLES = 20
 
-  readonly userState: UserState = { gid: 0, name: '', level: 0, gold: 0, exp: 0 }
+  readonly userState: UserState = { gid: 0, name: '', level: 0, gold: 0, exp: 0, openId: '' }
 
   constructor(
     private config: AppConfig,
@@ -385,6 +385,7 @@ export class Connection extends EventEmitter {
             this.userState.level = toNum(reply.basic.level)
             this.userState.gold = toNum(reply.basic.gold)
             this.userState.exp = toNum(reply.basic.exp)
+            this.userState.openId = reply.basic.open_id || ''
             if (reply.time_now_millis) syncServerTime(toNum(reply.time_now_millis))
 
             this.logger.log(

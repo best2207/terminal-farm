@@ -384,6 +384,127 @@
                   "id": 1
                 }
               }
+            },
+            "OSType": {
+              "values": {
+                "OSTYPE_UNKNOWN": 0,
+                "OSTYPE_ANDROID": 1,
+                "OSTYPE_IOS": 2,
+                "OSTYPE_HARMONY": 3,
+                "OSTYPE_PC": 4
+              }
+            },
+            "PlatFromType": {
+              "values": {
+                "PLATFROMTYPE_UNKNOWN": 0,
+                "PLATFROMTYPE_WX": 1,
+                "PLATFROMTYPE_QQ": 2,
+                "PLATFROMTYPE_PC": 3
+              }
+            },
+            "ClientReportFlowRequest": {
+              "fields": {
+                "os_type": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "plat_from_type": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "open_id": {
+                  "type": "string",
+                  "id": 3
+                },
+                "gid": {
+                  "type": "int64",
+                  "id": 4
+                },
+                "name": {
+                  "type": "string",
+                  "id": 5
+                },
+                "now": {
+                  "type": "int64",
+                  "id": 6
+                },
+                "level": {
+                  "type": "int64",
+                  "id": 7
+                },
+                "flow_type": {
+                  "type": "int64",
+                  "id": 101
+                },
+                "flow_type_str": {
+                  "type": "string",
+                  "id": 102
+                },
+                "param_int1": {
+                  "type": "int64",
+                  "id": 103
+                },
+                "param_int2": {
+                  "type": "int64",
+                  "id": 104
+                },
+                "param_int3": {
+                  "type": "int64",
+                  "id": 105
+                },
+                "param_int4": {
+                  "type": "int64",
+                  "id": 106
+                },
+                "param_int5": {
+                  "type": "int64",
+                  "id": 107
+                },
+                "param_str6": {
+                  "type": "string",
+                  "id": 108
+                },
+                "param_str7": {
+                  "type": "string",
+                  "id": 109
+                },
+                "param_str8": {
+                  "type": "string",
+                  "id": 110
+                },
+                "param_str9": {
+                  "type": "string",
+                  "id": 111
+                },
+                "param_str10": {
+                  "type": "string",
+                  "id": 112
+                }
+              }
+            },
+            "ClientReportFlowReply": {
+              "fields": {}
+            },
+            "BatchClientReportFlowRequest": {
+              "fields": {
+                "flows": {
+                  "rule": "repeated",
+                  "type": "ClientReportFlowRequest",
+                  "id": 1
+                }
+              }
+            },
+            "BatchClientReportFlowReply": {
+              "fields": {
+                "success_count": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "fail_count": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
             }
           }
         },

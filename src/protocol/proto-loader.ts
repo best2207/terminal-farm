@@ -20,6 +20,10 @@ export async function loadProto(): Promise<void> {
   types.HeartbeatReply = root.lookupType('gamepb.userpb.HeartbeatReply')
   types.ReportArkClickRequest = root.lookupType('gamepb.userpb.ReportArkClickRequest')
   types.ReportArkClickReply = root.lookupType('gamepb.userpb.ReportArkClickReply')
+  types.ClientReportFlowRequest = root.lookupType('gamepb.userpb.ClientReportFlowRequest')
+  types.ClientReportFlowReply = root.lookupType('gamepb.userpb.ClientReportFlowReply')
+  types.BatchClientReportFlowRequest = root.lookupType('gamepb.userpb.BatchClientReportFlowRequest')
+  types.BatchClientReportFlowReply = root.lookupType('gamepb.userpb.BatchClientReportFlowReply')
 
   // Plant
   types.AllLandsRequest = root.lookupType('gamepb.plantpb.AllLandsRequest')

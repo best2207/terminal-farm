@@ -62,7 +62,7 @@ export interface SessionState {
 
 export class SessionStore extends EventEmitter {
   readonly state: SessionState = {
-    user: { gid: 0, name: '', level: 0, gold: 0, exp: 0 },
+    user: { gid: 0, name: '', level: 0, gold: 0, exp: 0, openId: '' },
     lands: [],
     bag: [],
     friends: [],
