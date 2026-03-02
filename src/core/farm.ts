@@ -541,7 +541,7 @@ export class FarmManager {
         this.logger.log('农场', '没有土地数据')
         return
       }
-      const lands = landsReply.lands
+      let lands = landsReply.lands
       const status = this.analyzeLands(lands)
       const unlockedLandCount = lands.filter((l: any) => l?.unlocked).length
       this.isFirstCheck = false
@@ -605,11 +605,35 @@ export class FarmManager {
           this.logger.logWarn('收获', e.message)
         }
       }
-      const allDeadLands = [...status.dead, ...harvestedLandIds]
-      if (allDeadLands.length > 0 || status.empty.length > 0) {
+      const allDeadLands = [...status.dead]
+      const allEmptyLands = [...status.empty]
+
+      // 收获后重新检测土地状态，避免两季作物被误铲
+      if (harvestedLandIds.length > 0) {
         try {
-          await this.autoPlantEmptyLands(allDeadLands, status.empty, lands)
-          actions.push(`种植${allDeadLands.length + status.empty.length}`)
+          const refreshedReply = await this.getAllLands()
+          if (refreshedReply.lands?.length) {
+            const refreshedStatus = this.analyzeLands(refreshedReply.lands)
+            for (const hid of harvestedLandIds) {
+              if (refreshedStatus.empty.includes(hid)) {
+                allEmptyLands.push(hid)
+              } else if (refreshedStatus.dead.includes(hid)) {
+                allDeadLands.push(hid)
+              }
+              // 仍在生长中（两季作物第二季）-> 不处理，等下次巡查
+            }
+            this.store.updateLands(refreshedReply.lands)
+            lands = refreshedReply.lands
+          }
+        } catch (e: any) {
+          this.logger.logWarn('巡田', `收获后刷新土地状态失败: ${e.message}`)
+        }
+      }
+
+      if (allDeadLands.length > 0 || allEmptyLands.length > 0) {
+        try {
+          await this.autoPlantEmptyLands(allDeadLands, allEmptyLands, lands)
+          actions.push(`种植${allDeadLands.length + allEmptyLands.length}`)
         } catch (e: any) {
           this.logger.logWarn('种植', e.message)
         }
